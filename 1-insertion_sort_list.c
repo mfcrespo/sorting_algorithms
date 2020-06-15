@@ -8,37 +8,30 @@
 void insertion_sort_list(listint_t **list)
 {
 	listint_t *current = NULL; /* traverses list */
-	listint_t *temp = NULL; /* holds temp values */
-
-	current = *list;
-	current = current->next;
 
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 
+	current = (*list)->next;
+
 	while (current != NULL)
 	{
-		temp = current;
-
 		while (current->prev != NULL && current->n < current->prev->n)
 		{
+			current->prev->next = current->next;
 			/* link next and previous nodes together */
 			if (current->next != NULL)
-				current->next->prev = temp->prev;
-			current->prev->next = temp->next;
-
+				current->next->prev = current->prev;
 			/* move to previous node, insert temp node before it */
-			current = current->prev;
-			temp->prev = current->prev;
-			temp->next = current;
-			if (current->prev != NULL)
-				current->prev->next = temp;
-			current->prev = temp;
+			current->next = current->prev;
+			current->prev = current->prev->prev;
+			current->next->prev = current;
 
 			/* if node is new head of list, set it to *list */
-			if (temp->prev == NULL)
-				*list = temp;
-			current = current->prev;
+			if (!current->prev)
+				*list = current;
+			else
+				current->prev->next = current;
 			print_list(*list);
 		}
 		current = current->next;

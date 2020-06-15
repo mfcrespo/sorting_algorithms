@@ -24,9 +24,7 @@ void insertion_sort_list(listint_t **list)
 
 			/* link next and previous nodes together */
 			if (current->next != NULL)
-			{
 				current->next->prev = temp->prev;
-			}
 			current->prev->next = temp->next;
 
 			/* move to previous node, insert temp node before it */
@@ -34,16 +32,12 @@ void insertion_sort_list(listint_t **list)
 			temp->prev = current->prev;
 			temp->next = current;
 			if (current->prev != NULL)
-			{
 				current->prev->next = temp;
-			}
 			current->prev = temp;
 
 			/* if node is new head of list, set it to *list */
 			if (temp->prev == NULL)
-			{
 				*list = temp;
-			}
 
 			print_list(*list);
 			current = current->prev;

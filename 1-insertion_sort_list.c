@@ -18,10 +18,10 @@ void insertion_sort_list(listint_t **list)
 
 	while (current != NULL)
 	{
+		temp = current;
+
 		while (current->prev != NULL && current->n < current->prev->n)
 		{
-			temp = current;
-
 			/* link next and previous nodes together */
 			if (current->next != NULL)
 				current->next->prev = temp->prev;

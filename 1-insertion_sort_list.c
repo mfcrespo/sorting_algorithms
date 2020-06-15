@@ -38,9 +38,8 @@ void insertion_sort_list(listint_t **list)
 			/* if node is new head of list, set it to *list */
 			if (temp->prev == NULL)
 				*list = temp;
-
-			print_list(*list);
 			current = current->prev;
+			print_list(*list);
 		}
 		current = current->next;
 	}
